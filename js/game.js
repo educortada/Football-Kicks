@@ -5,11 +5,8 @@ class Game{
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
     this.player
-  // this.defense = []
-  // this.ball
-  // this.direction
-  // this.goal
-     this.isGameOver = false
+    this.defense = []
+    this.isGameOver = false
   }
   
   startLoop(){
@@ -17,6 +14,10 @@ class Game{
     this.player = new Player(this.canvas, 5)
 
     const loop = () => {
+      if(this.defense.length < 3){
+        const x = Math.random() * this.canvas.width
+        this.defense.push(new Defense(this.canvas, x))
+      }
       this.updateCanvas()
       this.clearCanvas()
       this.drawCanvas()
@@ -42,5 +43,8 @@ class Game{
   // Draw game
   drawCanvas(){
     this.player.draw()
+    this.defense.forEach(defense => {
+      defense.draw()
+    })
   }
 }
