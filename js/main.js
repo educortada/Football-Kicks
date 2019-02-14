@@ -41,6 +41,25 @@ const main = () => {
     // New game
     const game = new Game(canvas);
     game.startLoop()
+
+    // Set player direction left and right
+    const setPlayerDirection = event => {
+      if(event.code === 'ArrowLeft'){
+        // Decrease x
+        game.player.setDirection(-1)
+      } else if(event.code === 'ArrowRight'){
+        // Increase x
+        game.player.setDirection(1)
+      } 
+    }
+    document.addEventListener('keydown', setPlayerDirection)
+
+    // Stop direction
+    const setPlayerDirectionStop = () => {
+      game.player.setDirection(0)
+    }
+    document.addEventListener('keyup', setPlayerDirectionStop)
+
   }
 
   // Build Game Over DOOM
