@@ -1,10 +1,9 @@
 'use strict'
 
 class Player{
-  constructor(canvas, attempts){
+  constructor(canvas){
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
-    this.attempts = attempts
     this.radius = 10
     this.x = this.canvas.width / 2
     this.y = this.canvas.height - this.radius
@@ -25,7 +24,17 @@ class Player{
     this.context.fill()
     this.context.stroke()
   }
+
   setDirection(direction){
     this.direction = direction
+  }
+
+  // Check limits from the screen
+  checkScreen() {
+    if (this.x - this.radius <= 0) {
+      this.direction = 1
+    } else if (this.x + this.radius >= this.canvas.width) {
+      this.direction = -1
+    }
   }
 }

@@ -60,6 +60,37 @@ const main = () => {
     }
     document.addEventListener('keyup', setPlayerDirectionStop)
 
+    // Set ball direction
+    // const getPosition = event =>{
+    //   let triggerX = event.x;
+    //   let triggerY = event.y;
+    //   triggerX -= canvas.offsetLeft;
+    //   triggerX -= canvas.offsetTop;
+    //   alert("x:" + triggerX + " y:" + triggerY);
+
+    //   // // Vector
+    //   // const vectorX = triggerX - game.player.x
+    //   // const vectorY = triggerY - game.player.y
+
+    //   // const mag = Math.sqrt(vectorX * vectorX + vectorY * vectorY)
+    //   // const unitVectorX = vectorX / mag
+    //   // const unitVectorY = vectorY / mag
+
+    
+    //   // console.log(unitVectorX, unitVectorY)
+    //   // console.log(game.player.x += unitVectorX)
+    //   // game.player.y += unitVectorY
+
+    // }
+    // canvas.addEventListener("mousedown", getPosition, false);
+
+    const kick = event => {
+      if(event.code === 'Enter'){
+        game.ball.setPositionX(game.player.x)
+        game.isEnterPress = true
+      }
+    }
+    document.addEventListener('keydown', kick)
   }
 
   // Build Game Over DOOM
