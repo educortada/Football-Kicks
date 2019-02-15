@@ -9,6 +9,7 @@ class Player{
     this.y = this.canvas.height - this.radius
     this.direction = 0;
     this.speed = 3
+    //this.attempts = 1
   }
   
   // Update position when move left or right
@@ -37,4 +38,9 @@ class Player{
       this.direction = -1
     }
   }
+
+  // Lose attempts
+  // loseAttempt() {
+  //   this.attempts--;
+  // }
 }

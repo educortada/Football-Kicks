@@ -39,7 +39,10 @@ const main = () => {
     canvas.setAttribute('height', height)
 
     // New game
-    const game = new Game(canvas);
+    const game = new Game(canvas)
+    game.gameOverCallback(buildGameOverScreen)
+    game.gameWinCallback(bildWinScreen)
+
     game.startLoop()
 
     // Set player direction left and right
@@ -59,30 +62,6 @@ const main = () => {
       game.player.setDirection(0)
     }
     document.addEventListener('keyup', setPlayerDirectionStop)
-
-    // Set ball direction
-    // const getPosition = event =>{
-    //   let triggerX = event.x;
-    //   let triggerY = event.y;
-    //   triggerX -= canvas.offsetLeft;
-    //   triggerX -= canvas.offsetTop;
-    //   alert("x:" + triggerX + " y:" + triggerY);
-
-    //   // // Vector
-    //   // const vectorX = triggerX - game.player.x
-    //   // const vectorY = triggerY - game.player.y
-
-    //   // const mag = Math.sqrt(vectorX * vectorX + vectorY * vectorY)
-    //   // const unitVectorX = vectorX / mag
-    //   // const unitVectorY = vectorY / mag
-
-    
-    //   // console.log(unitVectorX, unitVectorY)
-    //   // console.log(game.player.x += unitVectorX)
-    //   // game.player.y += unitVectorY
-
-    // }
-    // canvas.addEventListener("mousedown", getPosition, false);
 
     const kick = event => {
       if(event.code === 'Enter'){
@@ -104,6 +83,15 @@ const main = () => {
     // Go back to the game
     const restartButton = document.querySelector('.js-restart')
     restartButton.addEventListener('click', buildGameScreen)
+  }
+
+  const bildWinScreen = () => {
+    buildDom(
+      `<section class="game-over-screen">
+        <h1>You win</h1>
+        <h2>GOOOOOAl!!!</h2>
+      </section>`
+    )
   }
 
   buildHomeScreen()

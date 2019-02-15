@@ -5,12 +5,12 @@ class Game{
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
     this.player
-    this.defense = []
+    this.defenses = []
     this.goal
     this.ball
-    this.attempts = 3
     this.isGameOver = false
     this.isEnterPress = false
+    this.youWin = false
   }
   
   startLoop(){
@@ -18,11 +18,10 @@ class Game{
     this.goal = new Goal(this.canvas)
     this.ball = new Ball(this.canvas)
 
+    const randomX = Math.random() * this.canvas.width
+    this.defenses.push(new Defense(this.canvas, randomX))
+
     const loop = () => {
-      if(this.defense.length < 3){
-        const x = Math.random() * this.canvas.width
-        this.defense.push(new Defense(this.canvas, x))
-      }
       this.checkAllCollisions()
       this.updateCanvas()
       this.clearCanvas()
@@ -54,13 +53,42 @@ class Game{
   drawCanvas(){
     this.player.draw()
     this.goal.draw()
-    this.defense.forEach(defense => {
-      defense.draw()
+    this.defenses.forEach(defense => {
+       defense.draw()
     })
     this.ball.draw()
   }
 
-  checkAllCollisions(){
+  // Check collisions
+
+  checkAllCollisions() {
     this.player.checkScreen()
+
+    this.defenses.forEach((defense) =>{
+      if (this.ball.checkCollisionDefense(defense)) {
+        //this.player.loseAttempt()
+        console.log('Defense!!!')
+        //this.defenses.splice(index, 1)
+        this.isGameOver = true
+        this.ball = null
+        this.ball = new Ball(this.canvas)
+        this.onGameOver()
+      }
+    })
+    
+    if(this.ball.checkCollisionGoal(this.goal)){
+      this.youWin = true
+      console.log('Goal!!!');
+      this.onWin()
+      //this.player.loseAttempt()
+    }
+  }
+
+  gameWinCallback(callback){
+    this.onWin = callback
+  }
+
+  gameOverCallback(callback) {
+    this.onGameOver = callback
   }
 }

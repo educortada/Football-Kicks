@@ -2,7 +2,7 @@
 
 class Defense{
   constructor(canvas, x){
-    this.size = 20
+    this.size = 40
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
     this.x = x
