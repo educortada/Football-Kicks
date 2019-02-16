@@ -1,12 +1,12 @@
 'use strict'
 
 class Defense{
-  constructor(canvas, x){
-    this.size = 40
+  constructor(canvas, x, y){
+    this.size = 20
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
     this.x = x
-    this.y = this.canvas.height / 2
+    this.y = y
   }
 
   draw() {

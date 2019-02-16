@@ -29,7 +29,6 @@ const main = () => {
         <canvas></canvas>
       </section>`
     )
-    //setInterval(buildGameOverScreen, 3000)
     
     // Set width and height of the canvas
     const width = document.querySelector('.game-screen').offsetWidth
@@ -41,7 +40,7 @@ const main = () => {
     // New game
     const game = new Game(canvas)
     game.gameOverCallback(buildGameOverScreen)
-    game.gameWinCallback(bildWinScreen)
+    game.gameWinCallback(buildWinScreen)
 
     game.startLoop()
 
@@ -85,13 +84,17 @@ const main = () => {
     restartButton.addEventListener('click', buildGameScreen)
   }
 
-  const bildWinScreen = () => {
+  const buildWinScreen = () => {
     buildDom(
       `<section class="game-over-screen">
         <h1>You win</h1>
         <h2>GOOOOOAl!!!</h2>
+        <button class="js-restart">Restart</button>
       </section>`
     )
+    // Go back to the game
+    const restartButton = document.querySelector('.js-restart')
+    restartButton.addEventListener('click', buildGameScreen)
   }
 
   buildHomeScreen()

@@ -5,7 +5,7 @@ class Ball{
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
     this.radius = 10
-    this.size = 10
+    this.size = 20
     this.x
     this.y = this.canvas.height - this.radius
     this.direction = -1
@@ -34,15 +34,13 @@ class Ball{
     return this.checkCollision(defense)
   }
 
-  checkCollisionGoal(goal){
-    return this.checkCollision(goal)
-  }
+  // Refactor checkCollision & checkCollisionGoal!
 
   // Check collision
   checkCollision(element) {
   
-    const collideRight = this.x + this.size / 2 > element.x - element.size / 2
-    const collideLeft = this.x - this.size / 2 < element.x + element.size / 2
+    const collideRight = this.x + this.size / 2 > element.x - element.size/ 2
+    const collideLeft = this.x - this.size / 2 < element.x + element.size/ 2
     const collideTop = this.y - this.size / 2 < element.y + element.size / 2
     const collideBottom = this.y + this.size / 2 > element.y - element.size / 2
 
@@ -52,8 +50,17 @@ class Ball{
     return false;
   }
 
+  // Check collision Goal
+  checkCollisionGoal(goal) {
+    const collideRight = this.x + this.size / 2 > goal.x - goal.width / 2
+    const collideLeft = this.x - this.size / 2 < goal.x + goal.width / 2
+    const collideTop = this.y - this.size / 2 < goal.y + goal.height / 2
+    const collideBottom = this.y + this.size / 2 > goal.y - goal.height / 2
 
-
-
+    if(collideRight && collideLeft && collideTop && collideBottom){
+      return true;
+    }
+    return false;
+  }
 
 }

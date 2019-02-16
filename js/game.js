@@ -18,15 +18,21 @@ class Game{
     this.goal = new Goal(this.canvas)
     this.ball = new Ball(this.canvas)
 
-    const randomX = Math.random() * this.canvas.width
-    this.defenses.push(new Defense(this.canvas, randomX))
-
     const loop = () => {
+      if(this.defenses.length < 5){
+        const randomX = Math.floor(Math.random() * this.canvas.width)
+        const randomY = Math.floor(Math.random() * this.canvas.height)
+
+        if (randomX > 100 && randomX < 500 && randomY > 100 && randomY < 400){
+          console.log(randomX)
+          this.defenses.push(new Defense(this.canvas, randomX, randomY))
+        }
+      }
       this.checkAllCollisions()
       this.updateCanvas()
       this.clearCanvas()
       this.drawCanvas()
-      // Keep inside the loop when the player have attemps
+      // Keep inside the loop while isGameOver = false
       if(!this.isGameOver){
         window.requestAnimationFrame(loop)
       }
@@ -38,6 +44,10 @@ class Game{
   updateCanvas(){
     // Update position from player
     this.player.update()
+
+    // Update position goal left & right
+    this.goal.update()
+
     // Update position from ball when kick
     if(this.isEnterPress){
       this.ball.update()
@@ -60,9 +70,9 @@ class Game{
   }
 
   // Check collisions
-
   checkAllCollisions() {
     this.player.checkScreen()
+    this.goal.checkScreen()
 
     this.defenses.forEach((defense) =>{
       if (this.ball.checkCollisionDefense(defense)) {
@@ -78,7 +88,10 @@ class Game{
     
     if(this.ball.checkCollisionGoal(this.goal)){
       this.youWin = true
+      this.isGameOver = true
       console.log('Goal!!!');
+      this.ball = null
+      this.ball = new Ball(this.canvas)
       this.onWin()
       //this.player.loseAttempt()
     }
