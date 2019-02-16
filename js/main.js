@@ -62,13 +62,24 @@ const main = () => {
     }
     document.addEventListener('keyup', setPlayerDirectionStop)
 
-    const kick = event => {
-      if(event.code === 'Enter'){
-        game.ball.setPositionX(game.player.x)
-        game.isEnterPress = true
+    // Kick the ball
+    const kickAllDirections = event => {
+      switch (event.code) {
+        case 'KeyA':
+          game.ball.setPositionX(game.player.x)
+          game.isLeftPress = true
+          break
+        case 'KeyD':
+          game.ball.setPositionX(game.player.x)
+          game.isRightPress = true
+          break
+        case 'KeyW':
+          game.ball.setPositionX(game.player.x)
+          game.isTopPress = true
+          break
       }
     }
-    document.addEventListener('keydown', kick)
+    document.addEventListener('keydown', kickAllDirections)
   }
 
   // Build Game Over DOOM

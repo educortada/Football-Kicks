@@ -8,9 +8,11 @@ class Game{
     this.defenses = []
     this.goal
     this.ball
-    this.isGameOver = false
-    this.isEnterPress = false
+    this.isTopPress = false
+    this.isLeftPress = false
+    this.isRightPress = false
     this.youWin = false
+    this.isGameOver = false
   }
   
   startLoop(){
@@ -49,9 +51,16 @@ class Game{
     this.goal.update()
 
     // Update position from ball when kick
-    if(this.isEnterPress){
-      this.ball.update()
+    if(this.isTopPress){
+      this.ball.update('W')
     }
+    if(this.isLeftPress){
+      this.ball.update('A')
+    }
+    if(this.isRightPress){
+      this.ball.update('D')
+    }
+
   }
 
   // Clear all screen
