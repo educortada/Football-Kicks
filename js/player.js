@@ -4,7 +4,7 @@ class Player{
   constructor(canvas){
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
-    this.radius = 10
+    //this.radius = 10
     this.size = 20
     this.x = this.canvas.width / 2
     this.y = this.canvas.height
@@ -35,9 +35,9 @@ class Player{
 
   // Check limits from the screen
   checkScreen() {
-    if (this.x <= 0) {
+    if (this.x - this.size / 2 <= 0) {
       this.direction = 1
-    } else if (this.x + this.size >= this.canvas.width) {
+    } else if (this.x + this.size / 2 >= this.canvas.width) {
       this.direction = -1
     }
   }

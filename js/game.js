@@ -74,10 +74,16 @@ class Game{
     this.player.checkScreen()
     this.goal.checkScreen()
 
+    if(this.ball.isOutScreen()){
+      this.isGameOver = true
+      this.ball = null
+      this.ball = new Ball(this.canvas)
+      this.onGameOver()
+    }
+
     this.defenses.forEach((defense) =>{
       if (this.ball.checkCollisionDefense(defense)) {
         //this.player.loseAttempt()
-        console.log('Defense!!!')
         //this.defenses.splice(index, 1)
         this.isGameOver = true
         this.ball = null
@@ -89,7 +95,6 @@ class Game{
     if(this.ball.checkCollisionGoal(this.goal)){
       this.youWin = true
       this.isGameOver = true
-      console.log('Goal!!!');
       this.ball = null
       this.ball = new Ball(this.canvas)
       this.onWin()

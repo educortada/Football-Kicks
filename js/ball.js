@@ -4,12 +4,12 @@ class Ball{
   constructor(canvas){
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
-    this.radius = 10
+    //this.radius = 10
     this.size = 20
     this.x
-    this.y = this.canvas.height - this.radius
+    this.y = this.canvas.height
     this.direction = -1
-    this.speed = 4
+    this.speed = 3
 
   }
   update(){
@@ -22,8 +22,8 @@ class Ball{
     // this.context.fillStyle = 'red'
     // this.context.fill()
     // this.context.stroke()
-    this.context.fillStyle = 'red'
-    this.context.fillRect(this.x, this.y, this.size, this.size)
+    this.context.fillStyle = 'green'
+    this.context.fillRect(this.x - this.size / 2, this.y - this.size, this.size, this.size)
   }
 
   setPositionX(x){
@@ -63,4 +63,11 @@ class Ball{
     return false;
   }
 
+  isOutScreen(){
+    if (this.y + this.size <= 0){
+      return true
+    } else{
+      return false
+    }
+  }
 }
