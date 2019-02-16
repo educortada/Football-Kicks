@@ -39,7 +39,6 @@ class Game{
         window.requestAnimationFrame(loop)
       }
     }
-
     window.requestAnimationFrame(loop)
   }
 
@@ -53,14 +52,11 @@ class Game{
     // Update position from ball when kick
     if(this.isTopPress){
       this.ball.update('W')
-    }
-    if(this.isLeftPress){
+    } else if(this.isLeftPress){
       this.ball.update('A')
-    }
-    if(this.isRightPress){
+    } else if(this.isRightPress){
       this.ball.update('D')
     }
-
   }
 
   // Clear all screen
@@ -91,7 +87,7 @@ class Game{
     }
 
     this.defenses.forEach((defense) =>{
-      if (this.ball.checkCollisionDefense(defense)) {
+      if (this.ball.checkCollision(defense)) {
         //this.player.loseAttempt()
         //this.defenses.splice(index, 1)
         this.isGameOver = true
@@ -101,7 +97,7 @@ class Game{
       }
     })
     
-    if(this.ball.checkCollisionGoal(this.goal)){
+    if(this.ball.checkCollision(this.goal)){
       this.youWin = true
       this.isGameOver = true
       this.ball = null

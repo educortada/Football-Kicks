@@ -5,7 +5,6 @@ class Player{
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
     this.radius = 10
-    //this.size = 20
     this.x = this.canvas.width / 2
     this.y = this.canvas.height
     this.direction = 0;
@@ -27,22 +26,11 @@ class Player{
     this.context.strokeStyle = this.color
     this.context.fill()
     this.context.stroke()
-    // this.context.fillStyle = 'red'
-    // this.context.fillRect(this.x - this.size / 2, this.y - this.size, this.size, this.size)
   }
 
   setDirection(direction){
     this.direction = direction
   }
-
-  // Check limits from the screen
-  // checkScreen() {
-  //   if (this.x - this.size / 2 <= 0) {
-  //     this.direction = 1
-  //   } else if (this.x + this.size / 2 >= this.canvas.width) {
-  //     this.direction = -1
-  //   }
-  // }
 
   checkScreen() {
     if (this.x - this.radius <= 0) {
@@ -51,9 +39,4 @@ class Player{
       this.direction = -1
     }
   }
-
-  // Lose attempts
-  // loseAttempt() {
-  //   this.attempts--;
-  // }
 }
