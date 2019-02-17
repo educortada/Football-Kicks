@@ -2,14 +2,14 @@
 
 class Goal{
   constructor(canvas){
-    this.radius = 30
+    this.radius = 15
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
     this.x = this.canvas.width / 2
-    this.y = 0
+    this.y = this.radius * 2
     this.direction = -1;
-    this.speed = 2
-    this.color = 'green'
+    this.speed = 3
+    this.color = 'blue'
   }
 
   draw(){

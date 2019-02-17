@@ -13,7 +13,11 @@ class Game{
     this.isRightPress = false
     this.youWin = false
     this.isGameOver = false
-    this.numberDefenses = 10
+    this.numberDefenses = 8
+    this.maxRandomX = this.canvas.width - 80
+    this.minRandomX = 80
+    this.maxRandomY = this.canvas.height - 100
+    this.minRandomY = 100
   }
 
   distance(currentX, currentY, otherX, otherY){
@@ -32,12 +36,11 @@ class Game{
     while(this.defenses.length < this.numberDefenses){
       // The maximum is exclusive and the minimum is inclusive
       // Math.floor(Math.random() * (max - min)) + min
-      const randomX = Math.floor( (Math.random() * ((this.canvas.width - 80) - 80)) + 80)
-      const randomY = Math.floor( (Math.random() * ((this.canvas.height - 100) - 100)) + 100 )
+      const randomX = Math.floor( (Math.random() * ((this.maxRandomX) - this.minRandomX)) + this.minRandomX)
+      const randomY = Math.floor( (Math.random() * ((this.maxRandomY) - this.minRandomY)) + this.minRandomY)
       
       const defense = new Defense(this.canvas, randomX, randomY)
       
-      // console.log(defense)
       let overapping = false
 
       for (let j = 0; j < this.defenses.length; j++) {
@@ -52,7 +55,6 @@ class Game{
         this.defenses.push(defense)
       }
     }
-    // console.log(this.defenses)
 
     const loop = () => {
       this.checkAllCollisions()
@@ -91,6 +93,7 @@ class Game{
 
   // Draw game
   drawCanvas(){
+    this.drawBackground()
     this.player.draw()
     this.goal.draw()
     this.defenses.forEach(defense => {
@@ -140,5 +143,11 @@ class Game{
   reset(){
     this.ball = null
     this.ball = new Ball(this.canvas)
+  }
+
+  drawBackground(){
+    const img = new Image()
+    img.src = './img/football-pitch.png'
+    this.context.drawImage(img, 0, 0)
   }
 }

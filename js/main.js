@@ -27,6 +27,9 @@ const main = () => {
       `<section class="game-screen">
         <h1>Game</h1>
         <canvas></canvas>
+        <audio autoplay loop>
+          <source src="./sound/crowd.mp3" type="audio/mpeg">
+        </audio>
       </section>`
     )
     

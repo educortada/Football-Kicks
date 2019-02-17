@@ -8,7 +8,7 @@ class Ball{
     this.x
     this.y = this.canvas.height
     this.direction = -1
-    this.color = 'red'
+    this.color = 'white'
     // 45 degrees
     this.speedX = this.speedY = 3
   }

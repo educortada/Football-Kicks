@@ -4,12 +4,12 @@ class Player{
   constructor(canvas){
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
-    this.radius = 10
+    this.radius = 15
     this.x = this.canvas.width / 2
     this.y = this.canvas.height
     this.direction = 0;
     this.speed = 3
-    this.color = 'orange'
+    this.color = 'blue'
     //this.attempts = 1
   }
   
@@ -25,7 +25,7 @@ class Player{
     this.context.fillStyle = this.color
     this.context.strokeStyle = this.color
     this.context.fill()
-    this.context.stroke()
+    this.context.stroke()    
   }
 
   setDirection(direction){

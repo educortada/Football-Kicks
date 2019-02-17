@@ -7,7 +7,7 @@ class Defense{
     this.context = this.canvas.getContext('2d')
     this.x = randomX
     this.y = randomY
-    this.color = 'blue'
+    this.color = 'black'
   }
 
   draw() {

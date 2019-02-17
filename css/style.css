@@ -45,14 +45,6 @@ p {
   padding-top: 20px;
 }
 
-@media (min-width: 768px) {
-  .container {
-    max-width: 728px;
-    margin: 0 auto;
-  }
-}
-
-
 /* ---- components ---- */
 
 .button {
@@ -63,10 +55,10 @@ p {
 }
 
 /* ---- section ---- */
-canvas{
-  border: 1px solid #000;
-}
 .game-screen{
   width: 600px;
   height: 500px;
+}
+.hide{
+  display: none;
 }
