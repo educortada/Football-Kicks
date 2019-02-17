@@ -13,6 +13,14 @@ class Game{
     this.isRightPress = false
     this.youWin = false
     this.isGameOver = false
+    this.numberDefenses = 10
+  }
+
+  distance(currentX, currentY, otherX, otherY){
+    const dx = currentX - otherX
+    const dy = currentY - otherY
+    const distance = Math.sqrt((dx * dx) + (dy * dy))
+    return distance
   }
   
   startLoop(){
@@ -20,16 +28,33 @@ class Game{
     this.goal = new Goal(this.canvas)
     this.ball = new Ball(this.canvas)
 
-    const loop = () => {
-      if(this.defenses.length < 5){
-        const randomX = Math.floor(Math.random() * this.canvas.width)
-        const randomY = Math.floor(Math.random() * this.canvas.height)
+    // Random defense without overlapping
+    while(this.defenses.length < this.numberDefenses){
+      // The maximum is exclusive and the minimum is inclusive
+      // Math.floor(Math.random() * (max - min)) + min
+      const randomX = Math.floor( (Math.random() * ((this.canvas.width - 80) - 80)) + 80)
+      const randomY = Math.floor( (Math.random() * ((this.canvas.height - 100) - 100)) + 100 )
+      
+      const defense = new Defense(this.canvas, randomX, randomY)
+      
+      // console.log(defense)
+      let overapping = false
 
-        if (randomX > 100 && randomX < 500 && randomY > 100 && randomY < 400){
-          console.log(randomX)
-          this.defenses.push(new Defense(this.canvas, randomX, randomY))
+      for (let j = 0; j < this.defenses.length; j++) {
+        const other = this.defenses[j]
+        const d = this.distance(defense.x, defense.y, other.x, other.y)
+        if(d < defense.radius + other.radius){
+          overapping = true
+          break
         }
       }
+      if(!overapping){
+        this.defenses.push(defense)
+      }
+    }
+    // console.log(this.defenses)
+
+    const loop = () => {
       this.checkAllCollisions()
       this.updateCanvas()
       this.clearCanvas()
@@ -81,8 +106,7 @@ class Game{
 
     if(this.ball.isOutScreen()){
       this.isGameOver = true
-      this.ball = null
-      this.ball = new Ball(this.canvas)
+      this.reset()
       this.onGameOver()
     }
 
@@ -91,8 +115,7 @@ class Game{
         //this.player.loseAttempt()
         //this.defenses.splice(index, 1)
         this.isGameOver = true
-        this.ball = null
-        this.ball = new Ball(this.canvas)
+        this.reset()
         this.onGameOver()
       }
     })
@@ -100,8 +123,7 @@ class Game{
     if(this.ball.checkCollision(this.goal)){
       this.youWin = true
       this.isGameOver = true
-      this.ball = null
-      this.ball = new Ball(this.canvas)
+      this.reset()
       this.onWin()
       //this.player.loseAttempt()
     }
@@ -113,5 +135,10 @@ class Game{
 
   gameOverCallback(callback) {
     this.onGameOver = callback
+  }
+
+  reset(){
+    this.ball = null
+    this.ball = new Ball(this.canvas)
   }
 }
