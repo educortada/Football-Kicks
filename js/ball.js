@@ -11,7 +11,7 @@ class Ball{
     this.speedX = this.speedY = 3 // 45 degrees
   }
   
-  update(keyPress){    
+  update(keyPress){
     //Change Ball Position
     switch (keyPress) {
       case 'A':
@@ -36,8 +36,6 @@ class Ball{
     if(this.x + this.radius >= this.canvas.width) {
       this.speedX = -this.speedX
     }
-
-    console.log(this.x, this.y)
   }
 
   draw(){

@@ -168,6 +168,7 @@ class Game{
   reset(){
     this.ball.setPositionX(this.player.x)
     this.ball.y = this.canvas.height + 10
+    this.ball.speedX = 3
     this.isTopPress = false
     this.isLeftPress = false
     this.isRightPress = false
