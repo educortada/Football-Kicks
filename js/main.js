@@ -11,10 +11,24 @@ const main = () => {
 
   // Build home DOMM
   const buildHomeScreen = () => {
-    buildDom(
-      `<section class="splash-screen">
-        <h1>Football Kicks</h1>
-        <button class="js-start">Start</button>
+    buildDom(`
+      <section class="splash-screen">
+        <header>
+          <img class="logo" src="./img/logo.png" alt="Logo" />
+        </header>
+        <article class="">
+          <h3>Game rules:</h3>
+          <ul>
+            <li>Pass the ball to your teammate and score a goal! 
+              <span role="image" aria-label="soccer">⚽</span>
+              <span role="image" aria-label="trophy">🏆</span>
+            </li>
+            <li>Kick forward: <strong>W</strong></li>
+            <li>Kick left: <strong>A</strong></li>
+            <li>kick right: <strong>D</strong></li>
+          </ul>
+          <button class="js-start">Start game</button>
+        </article>
       </section>`
     )
     const buttonStart = document.querySelector('.js-start')
@@ -23,13 +37,14 @@ const main = () => {
   
   // Build Game DOOM
   const buildGameScreen = () => {
-    buildDom(
-      `<section class="game-screen">
-        <h1>Game</h1>
-        <article class="">
-          <div class="balls">Balls: <span class="remaining-balls">0</span></div>
-          <div class="goals">Goals: <span class="scored-goals">0</span></div>
-        </article>
+    buildDom(`
+      <section class="game-screen">
+        <header>
+          <div class="balls">Balls: <span class="remaining-balls"></span>
+            <span role="image" aria-label="soccer">⚽</span>
+          </div>
+          <div class="goals">Goals: <span class="scored-goals"></span></div>
+        </header>
         <canvas></canvas>
         <audio autoplay loop>
           <source src="./sound/crowd.mp3" type="audio/mpeg">
@@ -48,7 +63,7 @@ const main = () => {
     const game = new Game(canvas)
     game.gameOverCallback(buildGameOverScreen)
     game.gameWinCallback(buildWinScreen)
-    
+
     game.gameUpdateScore(() => {
       const remainingBalls = document.querySelector('.remaining-balls')
       const scoredGoals = document.querySelector('.scored-goals')
@@ -100,7 +115,8 @@ const main = () => {
   const buildGameOverScreen = () => {
     buildDom(
       `<section class="game-over-screen">
-        <h2>Game Over</h2>
+        <h1>Game Over <span role="image" aria-label="disappointed">😞</span></h1>
+        <h3>Keep training! <span role="image" aria-label="muscle">💪🏼</span></h3>
         <button class="js-restart">Restart</button>
       </section>`
     )
@@ -109,14 +125,20 @@ const main = () => {
     restartButton.addEventListener('click', buildGameScreen)
   }
 
-  const buildWinScreen = () => {
+  const buildWinScreen = (score) => {
     buildDom(
-      `<section class="game-over-screen">
-        <h1>You win</h1>
-        <h2>GOOOOOAl!!!</h2>
+      `<section class="win-screen">
+        <h1>You scored <span class="scored-goals"></span> goal!!!</h1>
+        <h3>Congratulations! 
+          <span role="image" aria-label="clap">👏🏼</span>  
+          <span role="image" aria-label="trophy">🏆</span>
+        </h3>
         <button class="js-restart">Restart</button>
       </section>`
     )
+    const scoredGoals = document.querySelector('.scored-goals')
+    scoredGoals.innerHTML = score
+
     // Go back to the game
     const restartButton = document.querySelector('.js-restart')
     restartButton.addEventListener('click', buildGameScreen)

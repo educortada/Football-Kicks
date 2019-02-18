@@ -19,7 +19,7 @@ class Game{
     this.minRandomX = 80
     this.maxRandomY = this.canvas.height - 100
     this.minRandomY = 100
-    this.attempts = 3
+    this.attempts = 5
   }
 
   distance(currentX, currentY, otherX, otherY){
@@ -116,7 +116,7 @@ class Game{
       if(this.attempts <= 0){
         this.isGameOver = true
         if(this.scoredGoals > 0){
-          this.onWin()
+          this.onWin(this.scoredGoals)
         } else {
           this.onGameOver()
         }
@@ -130,7 +130,7 @@ class Game{
         if(this.attempts <= 0){
           this.isGameOver = true
           if(this.scoredGoals > 0){
-            this.onWin()
+            this.onWin(this.scoredGoals)
           } else {
             this.onGameOver()
           }
@@ -145,7 +145,7 @@ class Game{
       if(this.attempts <= 0){
         this.isGameOver = true
         if(this.scoredGoals > 0){
-          this.onWin()
+          this.onWin(this.scoredGoals)
         } else {
           this.onGameOver()
         }
