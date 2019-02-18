@@ -7,6 +7,7 @@ class Game{
     this.player
     this.defenses = []
     this.goal
+    this.scoredGoals = 0
     this.ball
     this.isTopPress = false
     this.isLeftPress = false
@@ -58,6 +59,7 @@ class Game{
     }
 
     const loop = () => {
+      this.updateScore()
       this.checkAllCollisions()
       this.updateCanvas()
       this.clearCanvas()
@@ -110,9 +112,6 @@ class Game{
 
     if(this.ball.isOutScreen()){
       this.attempts --
-      console.log(this.attempts)
-      console.log('Out!')
-      
       this.reset()
       if(this.attempts <= 0){
         this.isGameOver = true
@@ -123,9 +122,6 @@ class Game{
     this.defenses.forEach((defense) =>{
       if (this.ball.checkCollision(defense)) {
         this.attempts --
-        console.log(this.attempts)
-        console.log('Defense!')
-        
         this.reset()
         if(this.attempts <= 0){
           this.isGameOver = true
@@ -135,12 +131,9 @@ class Game{
     })
     
     if(this.ball.checkCollision(this.goal)){
-      
+      this.scoredGoals ++
       this.attempts --
       this.reset()
-      console.log(this.attempts)
-      console.log('Goal!')
-      
       if(this.attempts <= 0){
         this.isGameOver = true
         this.onWin()
@@ -154,6 +147,10 @@ class Game{
 
   gameOverCallback(callback) {
     this.onGameOver = callback
+  }
+
+  gameUpdateScore(callback) {
+    this.updateScore = callback
   }
 
   reset(){

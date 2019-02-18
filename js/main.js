@@ -26,6 +26,10 @@ const main = () => {
     buildDom(
       `<section class="game-screen">
         <h1>Game</h1>
+        <article class="">
+          <div class="balls">Balls: <span class="remaining-balls">0</span></div>
+          <div class="goals">Goals: <span class="scored-goals">0</span></div>
+        </article>
         <canvas></canvas>
         <audio autoplay loop>
           <source src="./sound/crowd.mp3" type="audio/mpeg">
@@ -44,6 +48,13 @@ const main = () => {
     const game = new Game(canvas)
     game.gameOverCallback(buildGameOverScreen)
     game.gameWinCallback(buildWinScreen)
+    
+    game.gameUpdateScore(() => {
+      const remainingBalls = document.querySelector('.remaining-balls')
+      const scoredGoals = document.querySelector('.scored-goals')
+      remainingBalls.innerHTML = game.attempts
+      scoredGoals.innerHTML = game.scoredGoals
+    })
 
     game.startLoop()
 

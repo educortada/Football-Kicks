@@ -7,7 +7,7 @@ class Player{
     this.radius = 15
     this.x = this.canvas.width / 2
     this.y = this.canvas.height
-    this.direction = 0;
+    this.direction = 0
     this.speed = 3
     this.color = 'blue'
   }
