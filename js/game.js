@@ -115,7 +115,11 @@ class Game{
       this.reset()
       if(this.attempts <= 0){
         this.isGameOver = true
-        this.onGameOver()
+        if(this.scoredGoals > 0){
+          this.onWin()
+        } else {
+          this.onGameOver()
+        }
       }
     }
 
@@ -125,7 +129,11 @@ class Game{
         this.reset()
         if(this.attempts <= 0){
           this.isGameOver = true
-          this.onGameOver()
+          if(this.scoredGoals > 0){
+            this.onWin()
+          } else {
+            this.onGameOver()
+          }
         }
       }
     })
@@ -136,7 +144,11 @@ class Game{
       this.reset()
       if(this.attempts <= 0){
         this.isGameOver = true
-        this.onWin()
+        if(this.scoredGoals > 0){
+          this.onWin()
+        } else {
+          this.onGameOver()
+        }
       }
     }
   }

@@ -60,9 +60,9 @@ class Ball{
     let distance = Math.sqrt((dx * dx) + (dy * dy))
 
     if(distance < this.radius + element.radius){ 
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   isOutScreen(){

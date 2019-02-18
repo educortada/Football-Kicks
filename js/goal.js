@@ -7,7 +7,7 @@ class Goal{
     this.context = this.canvas.getContext('2d')
     this.x = this.canvas.width / 2
     this.y = this.radius * 2
-    this.direction = -1;
+    this.direction = -1
     this.speed = 3
     this.color = 'blue'
   }
