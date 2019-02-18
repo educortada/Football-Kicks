@@ -5,13 +5,12 @@ class Ball{
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
     this.radius = 5
-    this.x
-    this.y = this.canvas.height
-    this.direction = -1
+    this.x = this.canvas.width / 2
+    this.y = this.canvas.height + 10
     this.color = 'white'
-    // 45 degrees
-    this.speedX = this.speedY = 3
+    this.speedX = this.speedY = 3 // 45 degrees
   }
+  
   update(keyPress){    
     //Change Ball Position
     switch (keyPress) {

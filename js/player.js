@@ -10,7 +10,6 @@ class Player{
     this.direction = 0;
     this.speed = 3
     this.color = 'blue'
-    //this.attempts = 1
   }
   
   // Update position when move left or right

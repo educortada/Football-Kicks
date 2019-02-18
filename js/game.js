@@ -18,6 +18,7 @@ class Game{
     this.minRandomX = 80
     this.maxRandomY = this.canvas.height - 100
     this.minRandomY = 100
+    this.attempts = 3
   }
 
   distance(currentX, currentY, otherX, otherY){
@@ -108,27 +109,42 @@ class Game{
     this.goal.checkScreen()
 
     if(this.ball.isOutScreen()){
-      this.isGameOver = true
+      this.attempts --
+      console.log(this.attempts)
+      console.log('Out!')
+      
       this.reset()
-      this.onGameOver()
+      if(this.attempts <= 0){
+        this.isGameOver = true
+        this.onGameOver()
+      }
     }
 
     this.defenses.forEach((defense) =>{
       if (this.ball.checkCollision(defense)) {
-        //this.player.loseAttempt()
-        //this.defenses.splice(index, 1)
-        this.isGameOver = true
+        this.attempts --
+        console.log(this.attempts)
+        console.log('Defense!')
+        
         this.reset()
-        this.onGameOver()
+        if(this.attempts <= 0){
+          this.isGameOver = true
+          this.onGameOver()
+        }
       }
     })
     
     if(this.ball.checkCollision(this.goal)){
-      this.youWin = true
-      this.isGameOver = true
+      
+      this.attempts --
       this.reset()
-      this.onWin()
-      //this.player.loseAttempt()
+      console.log(this.attempts)
+      console.log('Goal!')
+      
+      if(this.attempts <= 0){
+        this.isGameOver = true
+        this.onWin()
+      }
     }
   }
 
@@ -141,8 +157,11 @@ class Game{
   }
 
   reset(){
-    this.ball = null
-    this.ball = new Ball(this.canvas)
+    this.ball.setPositionX(this.player.x)
+    this.ball.y = this.canvas.height + 10
+    this.isTopPress = false
+    this.isLeftPress = false
+    this.isRightPress = false
   }
 
   drawBackground(){
