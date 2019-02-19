@@ -21,6 +21,7 @@ class Game{
     this.minRandomY = 100
     this.attempts = 5
     this.goalSound = new Audio('./sound/goal.mov')
+    this.crowd = new Audio ('./sound/crowd.mov')
     this.goal
   }
 
@@ -36,6 +37,9 @@ class Game{
     this.goal = new Goal(this.canvas)
     this.player = new Player(this.canvas)
     this.ball = new Ball(this.canvas)
+
+    this.crowd.volume = 0.4
+    this.crowd.play()
 
     // Random defense without overlapping
     while(this.defenses.length < this.numberDefenses){
