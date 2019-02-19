@@ -85,7 +85,6 @@ class Game{
     // Update position from ball when kick
     if(this.isTopPress){
       this.ball.update('W')
-      this.goalSound.play()
     } else if(this.isLeftPress){
       this.ball.update('A')
     } else if(this.isRightPress){
@@ -156,6 +155,7 @@ class Game{
     }
 
     if(this.ball.checkCollision(this.goal)){
+      this.goalSound.play()
       this.scoredGoals ++
       this.attempts --
       this.reset()
