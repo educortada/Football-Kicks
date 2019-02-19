@@ -9,7 +9,7 @@ class Player{
     this.y = this.canvas.height
     this.direction = 0
     this.speed = 3
-    this.color = 'blue'
+    this.color = 'DODGERBLUE'
   }
   
   // Update position when move left or right

@@ -14,13 +14,14 @@ class Game{
     this.isRightPress = false
     this.youWin = false
     this.isGameOver = false
-    this.numberDefenses = 8
+    this.numberDefenses = 6
     this.maxRandomX = this.canvas.width - 80
     this.minRandomX = 80
     this.maxRandomY = this.canvas.height - 100
     this.minRandomY = 100
     this.attempts = 5
     this.goalSound = new Audio('./sound/goal.mov')
+    this.goalkeeper
   }
 
   distance(currentX, currentY, otherX, otherY){
@@ -31,6 +32,7 @@ class Game{
   }
   
   startLoop(){
+    this.goalkeeper = new Goalkeeper(this.canvas)
     this.player = new Player(this.canvas)
     this.goal = new Goal(this.canvas)
     this.ball = new Ball(this.canvas)
@@ -98,6 +100,7 @@ class Game{
 
   // Draw game
   drawCanvas(){
+    this.goalkeeper.draw()
     this.player.draw()
     this.goal.draw()
     this.defenses.forEach(defense => {
@@ -140,6 +143,19 @@ class Game{
     })
     
     if(this.ball.checkCollision(this.goal)){
+      this.attempts --
+      this.reset()
+      if(this.attempts <= 0){
+        this.isGameOver = true
+        if(this.scoredGoals > 0){
+          this.onWin(this.scoredGoals)
+        } else {
+          this.onGameOver()
+        }
+      }
+    }
+
+    if(this.ball.checkCollision(this.goalkeeper)){
       this.scoredGoals ++
       this.attempts --
       this.reset()
@@ -152,6 +168,7 @@ class Game{
         }
       }
     }
+
   }
 
   gameWinCallback(callback){

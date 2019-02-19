@@ -6,10 +6,10 @@ class Goal{
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
     this.x = this.canvas.width / 2
-    this.y = this.radius * 2
+    this.y = this.radius * 3
     this.direction = -1
     this.speed = 3
-    this.color = 'blue'
+    this.color = 'ORANGERED'
   }
 
   draw(){
@@ -27,9 +27,9 @@ class Goal{
   }
 
   checkScreen() {
-    if (this.x - this.radius <= 0) {
+    if (this.x - this.radius <= this.canvas.width / 2 - 200) {
       this.direction = 1
-    } else if (this.x + this.radius >= this.canvas.width) {
+    } else if (this.x + this.radius >= this.canvas.width / 2 + 200) {
       this.direction = -1
     }
   }
