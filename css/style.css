@@ -118,11 +118,14 @@ button:hover{
 
 .balls, .goals{
   display: inline-block;
+}
+
+.scored-goals, .remaining-balls{
   font-weight: 600;
 }
 
 .remaining-balls{
-  margin-right: 0.5rem;
+  margin-right: 0.25rem;
 }
 
 .goals{

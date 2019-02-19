@@ -41,7 +41,7 @@ const main = () => {
     buildDom(`
       <section class="game-screen">
         <header>
-          <div class="balls">Balls: <span class="remaining-balls"></span>
+          <div class="balls">Remaining balls: <span class="remaining-balls"></span>
             <span role="image" aria-label="soccer">⚽</span>
           </div>
           <div class="goals">Goals: <span class="scored-goals"></span></div>
@@ -127,7 +127,7 @@ const main = () => {
   const buildWinScreen = (score) => {
     buildDom(
       `<section class="win-screen">
-        <h1>You scored <span class="scored-goals"></span> goal!!!</h1>
+        <h1>You scored <span class="scored-goals"></span> goals!!!</h1>
         <h3>Congratulations! 
           <span role="image" aria-label="clap">👏🏼</span>  
           <span role="image" aria-label="trophy">🏆</span>
