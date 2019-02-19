@@ -80,20 +80,21 @@ button:hover{
 }
 
 .game-screen{
+  position: relative;
   width: 600px;
   height: 500px;
+  background-image: url('../img/football-pitch.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .game-screen > header{
   position: absolute;
-  top: 80px;
+  top: -60px;
   padding: .75rem 1rem;
   border-radius: 6px;
   background: #fff;
-}
-
-canvas{
-  border: 4px solid #fff;
 }
 
 .balls, .goals{

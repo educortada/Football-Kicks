@@ -20,6 +20,7 @@ class Game{
     this.maxRandomY = this.canvas.height - 100
     this.minRandomY = 100
     this.attempts = 5
+    this.goalSound = new Audio('./sound/goal.mov')
   }
 
   distance(currentX, currentY, otherX, otherY){
@@ -82,6 +83,7 @@ class Game{
     // Update position from ball when kick
     if(this.isTopPress){
       this.ball.update('W')
+      this.goalSound.play()
     } else if(this.isLeftPress){
       this.ball.update('A')
     } else if(this.isRightPress){
@@ -96,7 +98,6 @@ class Game{
 
   // Draw game
   drawCanvas(){
-    this.drawBackground()
     this.player.draw()
     this.goal.draw()
     this.defenses.forEach(defense => {
@@ -172,11 +173,5 @@ class Game{
     this.isTopPress = false
     this.isLeftPress = false
     this.isRightPress = false
-  }
-
-  drawBackground(){
-    const img = new Image()
-    img.src = './img/football-pitch.png'
-    this.context.drawImage(img, 0, 0)
   }
 }

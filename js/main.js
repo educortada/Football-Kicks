@@ -46,9 +46,6 @@ const main = () => {
           <div class="goals">Goals: <span class="scored-goals"></span></div>
         </header>
         <canvas></canvas>
-        <audio autoplay loop>
-          <source src="./sound/crowd.mp3" type="audio/mpeg">
-        </audio>
       </section>`
     )
     
