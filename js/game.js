@@ -6,7 +6,7 @@ class Game{
     this.context = this.canvas.getContext('2d')
     this.player
     this.defenses = []
-    this.goal
+    this.goalkeeper
     this.scoredGoals = 0
     this.ball
     this.isTopPress = false
@@ -21,7 +21,7 @@ class Game{
     this.minRandomY = 100
     this.attempts = 5
     this.goalSound = new Audio('./sound/goal.mov')
-    this.goalkeeper
+    this.goal
   }
 
   distance(currentX, currentY, otherX, otherY){
@@ -33,8 +33,8 @@ class Game{
   
   startLoop(){
     this.goalkeeper = new Goalkeeper(this.canvas)
-    this.player = new Player(this.canvas)
     this.goal = new Goal(this.canvas)
+    this.player = new Player(this.canvas)
     this.ball = new Ball(this.canvas)
 
     // Random defense without overlapping
@@ -79,8 +79,8 @@ class Game{
     // Update position from player
     this.player.update()
 
-    // Update position goal left & right
-    this.goal.update()
+    // Update position goalkeeper left & right
+    this.goalkeeper.update()
 
     // Update position from ball when kick
     if(this.isTopPress){
@@ -100,9 +100,9 @@ class Game{
 
   // Draw game
   drawCanvas(){
+    this.goal.draw()
     this.goalkeeper.draw()
     this.player.draw()
-    this.goal.draw()
     this.defenses.forEach(defense => {
        defense.draw()
     })
@@ -112,7 +112,7 @@ class Game{
   // Check collisions
   checkAllCollisions() {
     this.player.checkScreen()
-    this.goal.checkScreen()
+    this.goalkeeper.checkScreen()
 
     if(this.ball.isOutScreen()){
       this.attempts --
@@ -142,7 +142,7 @@ class Game{
       }
     })
     
-    if(this.ball.checkCollision(this.goal)){
+    if(this.ball.checkCollision(this.goalkeeper)){
       this.attempts --
       this.reset()
       if(this.attempts <= 0){
@@ -155,7 +155,7 @@ class Game{
       }
     }
 
-    if(this.ball.checkCollision(this.goalkeeper)){
+    if(this.ball.checkCollision(this.goal)){
       this.scoredGoals ++
       this.attempts --
       this.reset()

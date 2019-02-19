@@ -2,12 +2,14 @@
 
 class Goalkeeper{
   constructor(canvas){
-    this.radius = 45
+    this.radius = 15
     this.canvas = canvas
     this.context = this.canvas.getContext('2d')
     this.x = this.canvas.width / 2
-    this.y = 0
-    this.color = 'rgba(255,255,255,0)'
+    this.y = this.radius * 3
+    this.direction = -1
+    this.speed = 3
+    this.color = 'ORANGERED'
   }
 
   draw(){
@@ -17,5 +19,19 @@ class Goalkeeper{
     this.context.strokeStyle = this.color
     this.context.fill()
     this.context.stroke()
+
   }
+  // Update position left and right
+  update(){
+    this.x = this.x + this.direction * this.speed
+  }
+
+  checkScreen() {
+    if (this.x - this.radius <= this.canvas.width / 2 - 200) {
+      this.direction = 1
+    } else if (this.x + this.radius >= this.canvas.width / 2 + 200) {
+      this.direction = -1
+    }
+  }
+
 }
