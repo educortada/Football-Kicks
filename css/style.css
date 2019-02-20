@@ -110,26 +110,20 @@ button:hover{
 
 .game-screen > header{
   position: absolute;
-  top: -60px;
-  padding: .75rem 1rem;
+  top: -85px;
+  padding: .75rem 1.25rem;
   border-radius: 6px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .balls, .goals{
-  display: inline-block;
+  display: block;
 }
 
 .scored-goals, .remaining-balls{
+  font-size: 1.25rem;
   font-weight: 600;
-}
-
-.remaining-balls{
-  margin-right: 0.25rem;
-}
-
-.goals{
-  margin-left: 0.5rem;
 }
 
 .win-screen{
@@ -146,4 +140,22 @@ button:hover{
   padding: 2rem;
   border-radius: 6px;
   background: #fff;
+}
+
+.rules{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
+}
+
+.rules-text{
+  padding: 1rem 0;
+}
+
+.keyboard{
+  display: block;
+  border: 2px solid #a2a2a2;
+  padding: 6px 13px;
+  border-radius: 6px;
 }

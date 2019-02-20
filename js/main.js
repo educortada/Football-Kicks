@@ -19,13 +19,30 @@ const main = () => {
         <article class="">
           <h2>Game rules:</h2>
           <ul>
-            <li>Kick the ball and score goals! Be careful with defense.
+            <li class="rules-text">Kick the ball and score goals! Be careful with defense.
               <span role="image" aria-label="soccer">⚽</span>
               <span role="image" aria-label="trophy">🏆</span>
             </li>
-            <li>Kick forward: <strong>W</strong></li>
-            <li>Kick left: <strong>A</strong></li>
-            <li>kick right: <strong>D</strong></li>
+            <li class="rules">
+              <p>Kick forward:</p>
+              <div class="keyboard">W</div>
+            </li>
+            <li class="rules">
+              <p>Kick left:</p>
+              <div class="keyboard">A</div>
+            </li>
+            <li class="rules">
+              <p>kick right:</p>
+              <div class="keyboard">D</div>
+            </li>
+            <li class="rules">
+              <p>Player move right:</p>
+              <div class="keyboard">➞</div>
+            </li>
+            <li class="rules">
+              <p>Player move left:</p>
+              <div class="keyboard">←</div>
+            </li>
           </ul>
           <button class="js-start">Start game</button>
         </article>
@@ -41,10 +58,8 @@ const main = () => {
     buildDom(`
       <section class="game-screen">
         <header>
-          <div class="balls">Remaining balls: <span class="remaining-balls"></span>
-            <span role="image" aria-label="soccer">⚽</span>
-          </div>
-          <div class="goals">Goals: <span class="scored-goals"></span></div>
+          <div class="balls"><span class="remaining-balls"></span> balls reamining</div>
+          <div class="goals"><span class="scored-goals"></span> goals</div>
         </header>
         <canvas></canvas>
       </section>`
