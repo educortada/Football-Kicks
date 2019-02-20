@@ -51,7 +51,6 @@ class Ball{
     this.x = x
   }
 
-  // Check collision
   checkCollision(element) {
     let dx = this.x - element.x
     let dy = this.y - element.y

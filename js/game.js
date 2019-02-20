@@ -6,15 +6,16 @@ class Game{
     this.context = this.canvas.getContext('2d')
     this.player
     this.defenses = []
+    this.numberDefenses = 6
     this.goalkeeper
     this.scoredGoals = 0
     this.ball
+    this.goal
     this.isTopPress = false
     this.isLeftPress = false
     this.isRightPress = false
     this.youWin = false
     this.isGameOver = false
-    this.numberDefenses = 6
     this.maxRandomX = this.canvas.width - 80
     this.minRandomX = 80
     this.maxRandomY = this.canvas.height - 100
@@ -22,14 +23,6 @@ class Game{
     this.attempts = 5
     this.goalSound = new Audio('./sound/goal.mov')
     this.crowd = new Audio ('./sound/crowd.mov')
-    this.goal
-  }
-
-  distance(currentX, currentY, otherX, otherY){
-    const dx = currentX - otherX
-    const dy = currentY - otherY
-    const distance = Math.sqrt((dx * dx) + (dy * dy))
-    return distance
   }
   
   startLoop(){
@@ -38,13 +31,11 @@ class Game{
     this.player = new Player(this.canvas)
     this.ball = new Ball(this.canvas)
 
-    this.crowd.volume = 0.4
+    this.crowd.volume = 0.5
     this.crowd.play()
 
-    // Random defense without overlapping
-    this.randomDefenses(this.numberDefenses)
-
     const loop = () => {
+      this.addRandomDefenses(this.numberDefenses) // Random defense without overlapping
       this.updateScore()
       this.checkAllCollisions()
       this.updateCanvas()
@@ -140,6 +131,7 @@ class Game{
     if(this.ball.checkCollision(this.goal)){
       this.goalSound.play()
       this.scoredGoals ++
+      this.numberDefenses ++
       this.attempts --
       this.reset()
       if(this.attempts <= 0){
@@ -175,29 +167,41 @@ class Game{
     this.isRightPress = false
   }
 
-  // Random defense without overlapping
-  randomDefenses(numberDefenses){
+  // Add random defense without overlapping
+  addRandomDefenses(numberDefenses){
     while(this.defenses.length < numberDefenses){
-      // The maximum is exclusive and the minimum is inclusive
-      // Math.floor(Math.random() * (max - min)) + min
-      const randomX = Math.floor( (Math.random() * ((this.maxRandomX) - this.minRandomX)) + this.minRandomX)
-      const randomY = Math.floor( (Math.random() * ((this.maxRandomY) - this.minRandomY)) + this.minRandomY)
-      
-      const defense = new Defense(this.canvas, randomX, randomY)
-      
-      let overapping = false
+      const defense = this.defenseWithRandomCoordinates()
+      this.addDefenseWithoutOverlapping(defense)
+    }
+  }
+  
+  // Interval: Math.floor(Math.random() * (max - min)) + min
+  defenseWithRandomCoordinates(){
+    const randomX = Math.floor( (Math.random() * ((this.maxRandomX) - this.minRandomX)) + this.minRandomX)
+    const randomY = Math.floor( (Math.random() * ((this.maxRandomY) - this.minRandomY)) + this.minRandomY)
+    return new Defense(this.canvas, randomX, randomY)
+  }
 
-      for (let j = 0; j < this.defenses.length; j++) {
-        const other = this.defenses[j]
-        const d = this.distance(defense.x, defense.y, other.x, other.y)
-        if(d < defense.radius + other.radius){
-          overapping = true
-          break
-        }
-      }
-      if(!overapping){
-        this.defenses.push(defense)
+  addDefenseWithoutOverlapping(currentDefense){
+    let overapping = false
+    // Push more defenses without overlapping
+    for (let j = 0; j < this.defenses.length; j++) {
+      const otherDefense = this.defenses[j]
+      const d = this.distance(currentDefense.x, currentDefense.y, otherDefense.x, otherDefense.y)
+      if(d < currentDefense.radius + otherDefense.radius){
+        overapping = true
+        break
       }
     }
+    if(!overapping){
+      this.defenses.push(currentDefense)
+    }
+  }
+
+  distance(currentX, currentY, otherX, otherY){
+    const dx = currentX - otherX
+    const dy = currentY - otherY
+    const distance = Math.sqrt((dx * dx) + (dy * dy))
+    return distance
   }
 }
