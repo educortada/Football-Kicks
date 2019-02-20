@@ -90,42 +90,21 @@ class Game{
     if(this.ball.isOutScreen()){
       this.attempts --
       this.reset()
-      if(this.attempts <= 0){
-        this.isGameOver = true
-        if(this.scoredGoals > 0){
-          this.onWin(this.scoredGoals)
-        } else {
-          this.onGameOver()
-        }
-      }
+      this.showLastScreen()
     }
 
     this.defenses.forEach((defense) =>{
       if (this.ball.checkCollision(defense)) {
         this.attempts --
         this.reset()
-        if(this.attempts <= 0){
-          this.isGameOver = true
-          if(this.scoredGoals > 0){
-            this.onWin(this.scoredGoals)
-          } else {
-            this.onGameOver()
-          }
-        }
+        this.showLastScreen()
       }
     })
     
     if(this.ball.checkCollision(this.goalkeeper)){
       this.attempts --
       this.reset()
-      if(this.attempts <= 0){
-        this.isGameOver = true
-        if(this.scoredGoals > 0){
-          this.onWin(this.scoredGoals)
-        } else {
-          this.onGameOver()
-        }
-      }
+      this.showLastScreen()
     }
 
     if(this.ball.checkCollision(this.goal)){
@@ -134,16 +113,20 @@ class Game{
       this.numberDefenses ++
       this.attempts --
       this.reset()
-      if(this.attempts <= 0){
-        this.isGameOver = true
-        if(this.scoredGoals > 0){
-          this.onWin(this.scoredGoals)
-        } else {
-          this.onGameOver()
-        }
-      }
+      this.showLastScreen()
     }
 
+  }
+
+  showLastScreen(){
+    if(this.attempts <= 0){
+      this.isGameOver = true
+      if(this.scoredGoals > 0){
+        this.onWin(this.scoredGoals)
+      } else {
+        this.onGameOver()
+      }
+    }
   }
 
   gameWinCallback(callback){
