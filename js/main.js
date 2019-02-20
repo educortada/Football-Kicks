@@ -29,7 +29,7 @@ const main = () => {
           </ul>
           <button class="js-start">Start game</button>
         </article>
-        <img class="img-goal img-medium" src="./img/goal.png" alt="goal" />
+        <img class="img-goal img-medium" src="./img/goal.jpg" alt="goal" />
       </section>`
     )
     const buttonStart = document.querySelector('.js-start')
@@ -116,7 +116,7 @@ const main = () => {
         <h1>Game Over <span role="image" aria-label="disappointed">😞</span></h1>
         <h3>Keep training! <span role="image" aria-label="muscle">💪🏼</span></h3>
         <button class="js-restart">Restart</button>
-        <img class="img-goal img-small" src="./img/goal.png" alt="goal" />
+        <img class="img-goal img-small" src="./img/goal.jpg" alt="goal" />
       </section>`
     )
     // Go back to the game
@@ -133,7 +133,7 @@ const main = () => {
           <span role="image" aria-label="trophy">🏆</span>
         </h3>
         <button class="js-restart">Restart</button>
-        <img class="img-goal img-small" src="./img/goal.png" alt="goal" />
+        <img class="img-goal img-small" src="./img/goal.jpg" alt="goal" />
       </section>`
     )
     const scoredGoals = document.querySelector('.scored-goals')

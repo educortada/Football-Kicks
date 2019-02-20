@@ -42,28 +42,7 @@ class Game{
     this.crowd.play()
 
     // Random defense without overlapping
-    while(this.defenses.length < this.numberDefenses){
-      // The maximum is exclusive and the minimum is inclusive
-      // Math.floor(Math.random() * (max - min)) + min
-      const randomX = Math.floor( (Math.random() * ((this.maxRandomX) - this.minRandomX)) + this.minRandomX)
-      const randomY = Math.floor( (Math.random() * ((this.maxRandomY) - this.minRandomY)) + this.minRandomY)
-      
-      const defense = new Defense(this.canvas, randomX, randomY)
-      
-      let overapping = false
-
-      for (let j = 0; j < this.defenses.length; j++) {
-        const other = this.defenses[j]
-        const d = this.distance(defense.x, defense.y, other.x, other.y)
-        if(d < defense.radius + other.radius){
-          overapping = true
-          break
-        }
-      }
-      if(!overapping){
-        this.defenses.push(defense)
-      }
-    }
+    this.randomDefenses(this.numberDefenses)
 
     const loop = () => {
       this.updateScore()
@@ -194,5 +173,31 @@ class Game{
     this.isTopPress = false
     this.isLeftPress = false
     this.isRightPress = false
+  }
+
+  // Random defense without overlapping
+  randomDefenses(numberDefenses){
+    while(this.defenses.length < numberDefenses){
+      // The maximum is exclusive and the minimum is inclusive
+      // Math.floor(Math.random() * (max - min)) + min
+      const randomX = Math.floor( (Math.random() * ((this.maxRandomX) - this.minRandomX)) + this.minRandomX)
+      const randomY = Math.floor( (Math.random() * ((this.maxRandomY) - this.minRandomY)) + this.minRandomY)
+      
+      const defense = new Defense(this.canvas, randomX, randomY)
+      
+      let overapping = false
+
+      for (let j = 0; j < this.defenses.length; j++) {
+        const other = this.defenses[j]
+        const d = this.distance(defense.x, defense.y, other.x, other.y)
+        if(d < defense.radius + other.radius){
+          overapping = true
+          break
+        }
+      }
+      if(!overapping){
+        this.defenses.push(defense)
+      }
+    }
   }
 }
